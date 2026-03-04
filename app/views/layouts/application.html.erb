@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CdpWebManyoTask</title>
+    <title>Task Management</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav style="margin: 1em 0; padding: 1em; background: #f0f0f0;">
+      <%= link_to "Tasks Index", tasks_path, id: "tasks-index" %>
+      |
+      <%= link_to "New Task", new_task_path, id: "new-task" %>
+    </nav>
+
+    <% if notice %>
+      <div style="color: green; margin: 1em 0; padding: 0.5em; border: 1px solid green;">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div style="color: red; margin: 1em 0; padding: 0.5em; border: 1px solid red;">
+        <%= alert %>
+      </div>
+    <% end %>
+
+    <main style="padding: 1em;">
+      <%= yield %>
+    </main>
   </body>
 </html>
