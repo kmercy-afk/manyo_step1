@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :task do
-    title { "Write weekly report" }
-    content { "Summarize progress and plan next steps" }
+    title { "sample task" }
+    content { "Sample content" }
   end
 
   # Optional second factory for variety in system tests

@@ -1,0 +1,41 @@
+ja:
+  activerecord:
+    models:
+      task: Task
+    attributes:
+      task:
+        title: Title
+        content: Content
+
+  tasks:
+    index:
+      title: Task list page
+      new: Register a task
+      show: Details
+      edit: Edit
+      destroy: Delete
+      confirm: Are you sure you want to delete it?
+
+    new:
+      title: Task registration page
+      submit: Register
+      back: Return
+
+    show:
+      title: Task content page
+      back: Return
+      edit: Edit
+
+    edit:
+      title: Task edit page
+      submit: Update
+      back: Return
+
+  flash:
+    created: I have registered a task
+    updated: Tasks have been updated
+    destroyed: The task has been deleted
+
+  errors:
+    blank_title: Please enter a Title
+    blank_content: Please enter the content
