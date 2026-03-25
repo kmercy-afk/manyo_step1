@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.6'
-
 gem 'concurrent-ruby', '= 1.3.4'   # strict version pin
+
+ruby '3.2.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '6.1.7.7'
