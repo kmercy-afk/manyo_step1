@@ -1,5 +1,4 @@
-// app/javascript/packs/application.js
-import Rails from "@rails/ujs"
-import "@hotwired/turbo-rails"
+import Rails from "@rails/ujs";
+Rails.start();
 
-Rails.start()
+import "@hotwired/turbo-rails";
