@@ -22,13 +22,13 @@ RSpec.describe 'Task management', type: :system do
   describe 'Task creation' do
     before do
       visit tasks_path
-      find('#new-task-link').click
+      click_link 'Register a task'
     end
 
     it 'creates a new task and displays it at the top' do
       fill_in 'Title', with: 'new_task'
       fill_in 'Content', with: 'new_content'
-      find('#create-task').click
+      click_button 'Register'
 
       expect(page).to have_content 'I have registered a task'
 
