@@ -1,10 +1,5 @@
 module.exports = {
   presets: [
-    ['@babel/preset-env', { targets: "> 0.25%, not dead" }]
-  ],
-  plugins: [
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-private-methods',
-    '@babel/plugin-proposal-private-property-in-object'
+    ['@babel/preset-env', { targets: "defaults" }]
   ]
 };
