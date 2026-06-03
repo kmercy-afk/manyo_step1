@@ -12,6 +12,9 @@
   <body>
 
 <nav>
+  <%= link_to t('global.navigation.tasks'), tasks_path %> |
+  <%= link_to t('global.navigation.new_task'), new_task_path %>
+  
   <%= link_to t('tasks.index.title'),
               tasks_path,
               id: "tasks-index" %>

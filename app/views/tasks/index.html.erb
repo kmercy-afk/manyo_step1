@@ -17,7 +17,7 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
-        <td><%= l(task.created_at) %></td>
+        <td><%= task.created_at.strftime("%Y-%m-%d %H:%M") %></td>
 
         <td>
           <%= link_to t('tasks.index.show'),
@@ -41,4 +41,6 @@
   </tbody>
 </table>
 
-<%= paginate @tasks %>
+<div class="pagination">
+  <%= paginate @tasks %>
+</div>

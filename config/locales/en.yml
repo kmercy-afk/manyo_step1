@@ -1,29 +1,39 @@
 en:
+  global:
+    navigation:
+      tasks: "Tasks"
+      new_task: "New Task"
+
   tasks:
-    index: "Task list page"
-    new: "Task registration page"
-    show: "Task detail page"
-    edit: "Task edit page"
+    index:
+      title: "Task List"
+      new: "New Task"
+      show: "Show"
+      edit: "Edit"
+      destroy: "Delete"
+      confirm: "Are you sure you want to delete?"
 
-  nav:
-    list: "Task list"
-    new: "Register a task"
+    show:
+      title: "Task Details"
 
-  actions:
-    show: "Details"
-    edit: "edit"
-    delete: "delete"
+    new:
+      title: "New Task"
 
-  helpers:
-    submit:
-      create: "register"
-      update: "Update"
+    edit:
+      title: "Edit Task"
+      submit: "Update Task"
 
   flash:
-    created: "I have registered a task"
-    updated: "Tasks have been updated"
-    deleted: "The task has been deleted"
+    create: "Task was successfully created."
+    update: "Task was successfully updated."
+    destroy: "Task was successfully deleted."
 
-  errors:
-    title_blank: "Please enter a Title"
-    content_blank: "Please enter the content"
+  activerecord:
+    errors:
+      models:
+        task:
+          attributes:
+            title:
+              blank: "Title cannot be blank"
+            content:
+              blank: "Content cannot be blank"

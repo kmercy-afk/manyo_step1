@@ -24,6 +24,7 @@ class TasksController < ApplicationController
       redirect_to tasks_path,
                   notice: t('flash.create')
     else
+      flash.now[:alert] = t('activerecord.errors.models.task.attributes.title.blank')
       render :new
     end
   end
