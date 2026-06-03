@@ -1,0 +1,31 @@
+<%= form_with(model: @task, local: true) do |f| %>
+
+  <% if @task.errors.any? %>
+    <div>
+      <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div>
+    <% if @task.persisted? %>
+      <%= f.submit t('tasks.edit.submit'), id: "update-task" %>
+    <% else %>
+      <%= f.submit t('tasks.new.submit'), id: "create-task" %>
+    <% end %>
+  </div>
+
+<% end %>

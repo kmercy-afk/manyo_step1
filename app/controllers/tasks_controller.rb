@@ -1,45 +1,54 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: %i[show edit update destroy]
+
   def index
-    @tasks = Task.order(created_at: :desc).page(params[:page]).per(10)
+    @tasks = Task.order(created_at: :desc)
+                 .page(params[:page])
+                 .per(10)
   end
 
   def show
-    @task = Task.find(params[:id])
   end
 
   def new
     @task = Task.new
   end
 
+  def edit
+  end
+
   def create
     @task = Task.new(task_params)
+
     if @task.save
-      redirect_to tasks_path, notice: t('flash.created')
+      redirect_to tasks_path,
+                  notice: t('flash.create')
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
-  def edit
-    @task = Task.find(params[:id])
-  end
-
   def update
-    @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to tasks_path, notice: 'flash.updated'
+      redirect_to task_path(@task),
+                  notice: t('flash.update')
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
-    redirect_to tasks_path, notice: "flash.destroyed"
+
+    redirect_to tasks_path,
+                notice: t('flash.destroy')
   end
 
   private
+
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
   def task_params
     params.require(:task).permit(:title, :content)

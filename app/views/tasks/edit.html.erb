@@ -1,31 +1,7 @@
 <h1><%= t('tasks.edit.title') %></h1>
 
-<%= form_with model: @task, local: true do |f| %>
-  <div>
-    <%= f.label :title, Task.human_attribute_name(:title) %>
-    <%= f.text_field :title %>
+<%= render 'form' %>
 
-    <% if @task.errors[:title].any? %>
-      <span style="color: red;">
-        <%= @task.errors[:title].join(", ") %>
-      </span>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.label :content, Task.human_attribute_name(:content) %>
-    <%= f.text_area :content %>
-
-    <% if @task.errors[:content].any? %>
-      <span style="color: red;">
-        <%= @task.errors[:content].join(", ") %>
-      </span>
-    <% end %>
-  </div>
-
-  <div>
-    <%= f.submit t('tasks.edit.submit'), id: "update-task" %>
-  </div>
-<% end %>
-
-<%= link_to t('tasks.edit.back'), task_path(@task), id: "back" %>
+<%= link_to t('tasks.edit.back'),
+            tasks_path,
+            id: "back" %>

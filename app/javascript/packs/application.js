@@ -1,8 +1,8 @@
-// Import and start Rails UJS
-import Rails from "@rails/ujs";
-Rails.start();
+import Rails from "@rails/ujs"
+import Turbolinks from "turbolinks"
+import ActiveStorage from "@rails/activestorage"
+import "channels"
 
-// Turbo
-import "@hotwired/turbo-rails";
-
-// Any other JS
+Rails.start()
+Turbolinks.start()
+ActiveStorage.start()

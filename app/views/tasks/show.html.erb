@@ -11,9 +11,14 @@
 </p>
 
 <p>
-  <strong><%= t('activerecord.attributes.task.created_at') %>:</strong>
-  <%= @task.created_at.strftime("%Y-%m-%d %H:%M") %>
+  <strong><%= Task.human_attribute_name(:created_at) %>:</strong>
+  <%= l(@task.created_at) %>
 </p>
 
-<%= link_to t('tasks.show.edit'), edit_task_path(@task), id: "edit-task" %>
-<%= link_to t('tasks.show.back'), tasks_path, id: "back" %>
+<%= link_to t('tasks.show.edit'),
+            edit_task_path(@task),
+            id: "edit-task" %>
+
+<%= link_to t('tasks.show.back'),
+            tasks_path,
+            id: "back" %>

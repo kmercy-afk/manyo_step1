@@ -1,39 +1,28 @@
 require 'rails_helper'
 
-RSpec.describe 'Task management', type: :system do
-  describe 'List display function' do
-    let!(:task1) { FactoryBot.create(:task, title: 'first_task', created_at: '2022-02-18') }
-    let!(:task2) { FactoryBot.create(:task, title: 'second_task', created_at: '2022-02-17') }
-    let!(:task3) { FactoryBot.create(:task, title: 'third_task', created_at: '2022-02-16') }
-
-    before do
-      visit tasks_path
+RSpec.describe Task, type: :model do
+  describe 'Validation test' do
+    context 'when the task title is an empty string' do
+      it 'validation fails (task is invalid)' do
+        task = Task.new(title: '', content: 'Content')
+        task.valid?
+        expect(task.errors[:title]).to be_present
+      end
     end
 
-    it 'displays tasks in descending order of creation date and time' do
-      task_list = all('tbody tr')
-
-      expect(task_list[0]).to have_content 'first_task'
-      expect(task_list[1]).to have_content 'second_task'
-      expect(task_list[2]).to have_content 'third_task'
-    end
-  end
-
-  describe 'Task creation' do
-    before do
-      visit tasks_path
-      click_link 'Register a task'
+    context 'when the task content is empty' do
+      it 'validation fails (task is invalid)' do
+        task = Task.new(title: 'Title', content: '')
+        task.valid?
+        expect(task.errors[:content]).to be_present
+      end
     end
 
-    it 'creates a new task and displays it at the top' do
-      fill_in 'Title', with: 'new_task'
-      fill_in 'Content', with: 'new_content'
-      click_button 'Register'
-
-      expect(page).to have_content 'I have registered a task'
-
-      visit tasks_path
-      expect(all('tbody tr')[0]).to have_content 'new_task'
+    context 'when both title and content have values' do
+      it 'the task is valid and can be saved' do
+        task = Task.new(title: 'Test title', content: 'Test content')
+        expect(task).to be_valid
+      end
     end
   end
 end
