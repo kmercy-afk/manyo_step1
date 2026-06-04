@@ -82,6 +82,7 @@ GEM
     date (3.5.1)
     diff-lcs (1.6.2)
     erubi (1.13.1)
+    execjs (2.10.1)
     factory_bot (6.5.6)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
@@ -255,6 +256,8 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
+    terser (1.2.7)
+      execjs (>= 0.3.0, < 3)
     thor (1.5.0)
     tilt (2.7.0)
     timeout (0.6.1)
@@ -314,6 +317,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  terser
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
