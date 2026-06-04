@@ -12,4 +12,7 @@ rails assets:precompile
 echo "=== Running database migrations ==="
 rails db:migrate
 
+echo "=== Seeding initial data ==="
+rails db:seed
+
 echo "=== Build completed successfully ==="
