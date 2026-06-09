@@ -34,6 +34,7 @@ class TasksController < ApplicationController
       redirect_to task_path(@task),
                   notice: t('flash.update')
     else
+      flash.now[:alert] = t('activerecord.errors.models.task.attributes.title.blank')
       render :edit
     end
   end
