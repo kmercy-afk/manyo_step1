@@ -80,6 +80,10 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5 
   database: cdp_web_manyo_task_production
   username: cdp_web_manyo_task
   password: <%= ENV['CDP_WEB_MANYO_TASK_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
