@@ -1,12 +1,25 @@
 FactoryBot.define do
   factory :task do
-    title { "sample task" }
-    content { "Sample content" }
+    title { "first_task" }
+    content { "first content" }
+    deadline_on { Date.new(2022, 2, 18) }
+    priority { :medium }
+    status { :not_started }
   end
 
-  # Optional second factory for variety in system tests
   factory :second_task, class: Task do
-    title { "Call client" }
-    content { "Discuss project deadline" }
+    title { "second_task" }
+    content { "second content" }
+    deadline_on { Date.new(2022, 2, 17) }
+    priority { :high }
+    status { :in_progress }
+  end
+
+  factory :third_task, class: Task do
+    title { "third_task" }
+    content { "third content" }
+    deadline_on { Date.new(2022, 2, 16) }
+    priority { :low }
+    status { :completed }
   end
 end

@@ -21,6 +21,27 @@
   </div>
 
   <div>
+    <%= f.label :deadline_on, "End Date" %>
+    <%= f.date_field :deadline_on %>
+  </div>
+
+  <div>
+    <%= f.label :priority, "Priority" %>
+    <%= f.select :priority,
+                 [["High", "high"], ["Medium", "medium"], ["Low", "low"]],
+                 { include_blank: true } %>
+  </div>
+
+  <div>
+    <%= f.label :status, "Status" %>
+    <%= f.select :status,
+                 [["Not Started", "not_started"],
+                  ["In Progress", "in_progress"],
+                  ["Completed", "completed"]],
+                 { include_blank: true } %>
+  </div>
+
+  <div>
     <% if @task.persisted? %>
       <%= f.submit t('tasks.edit.submit'), id: "update-task" %>
     <% else %>
