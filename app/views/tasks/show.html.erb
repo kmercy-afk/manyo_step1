@@ -11,6 +11,21 @@
 </p>
 
 <p>
+  <strong>End Date:</strong>
+  <%= @task.deadline_on %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @task.priority.humanize %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @task.status.humanize %>
+</p>
+
+<p>
   <strong><%= Task.human_attribute_name(:created_at) %>:</strong>
   <%= l(@task.created_at) %>
 </p>

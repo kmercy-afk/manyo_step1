@@ -18,6 +18,7 @@ en:
 
     new:
       title: "New Task"
+      submit: "Create Task"
 
     edit:
       title: "Edit Task"
