@@ -19,11 +19,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -48,17 +46,18 @@ class UsersController < ApplicationController
   end
 
   def user_params
-  permitted_params = params.require(:user).permit(
-    :name,
-    :email,
-    :password,
-    :password_confirmation
-  )
+    permitted_params = params.require(:user).permit(
+      :name,
+      :email,
+      :password,
+      :password_confirmation
+    )
 
-  if permitted_params[:password].blank?
-    permitted_params.delete(:password)
-    permitted_params.delete(:password_confirmation)
+    if permitted_params[:password].blank?
+      permitted_params.delete(:password)
+      permitted_params.delete(:password_confirmation)
+    end
+
+    permitted_params
   end
-
-  permitted_params
 end
