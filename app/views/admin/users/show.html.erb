@@ -1,0 +1,44 @@
+<h1>User Details Page</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email address:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Administrator privileges:</strong>
+  <%= @user.admin? ? 'Yes' : 'None' %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Creation date</th>
+      <th>Expiration date</th>
+      <th>Priority</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= task.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+        <td><%= task.deadline_on %></td>
+        <td><%= task.priority.humanize %></td>
+        <td><%= task.status.humanize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', admin_users_path, id: 'back' %>

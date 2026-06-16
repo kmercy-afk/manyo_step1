@@ -2,29 +2,41 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = Task.order(created_at: :desc)
-                 .page(params[:page])
-                 .per(10)
-  end
+  @tasks = current_user.tasks
+
+  @tasks = @tasks.search_title(params[:title]) if params[:title].present?
+  @tasks = @tasks.search_status(params[:status]) if params[:status].present?
+
+  @tasks =
+    case params[:sort]
+    when 'deadline'
+      @tasks.deadline_sort
+    when 'priority'
+      @tasks.priority_sort
+    else
+      @tasks.latest
+    end
+
+  @tasks = @tasks.page(params[:page]).per(10)
+end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.build
   end
 
   def edit
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     if @task.save
       redirect_to tasks_path,
                   notice: t('flash.create')
     else
-      flash.now[:alert] = t('activerecord.errors.models.task.attributes.title.blank')
       render :new
     end
   end
@@ -34,7 +46,6 @@ class TasksController < ApplicationController
       redirect_to task_path(@task),
                   notice: t('flash.update')
     else
-      flash.now[:alert] = t('activerecord.errors.models.task.attributes.title.blank')
       render :edit
     end
   end
@@ -49,10 +60,21 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
+
+    return if @task.present?
+
+    redirect_to tasks_path,
+                alert: 'You do not have permission to access'
   end
 
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(
+      :title,
+      :content,
+      :deadline_on,
+      :priority,
+      :status
+    )
   end
 end

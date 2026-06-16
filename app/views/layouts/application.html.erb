@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Task Management</title>
+    <title>CdpWebManyoTask</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
+    <nav>
+      <ul>
+        <% if logged_in? %>
+          <li><%= link_to 'Task list', tasks_path %></li>
+          <li><%= link_to 'Register a task', new_task_path %></li>
+          <li><%= link_to 'Account Settings', user_path(current_user), id: 'account-setting' %></li>
 
-<nav>
-  <%= link_to t('global.navigation.tasks'), tasks_path %> |
-  <%= link_to t('global.navigation.new_task'), new_task_path %>
-  
-  <%= link_to t('tasks.index.title'),
-              tasks_path,
-              id: "tasks-index" %>
+          <% if current_user.admin? %>
+            <li><%= link_to 'User list', admin_users_path, id: 'users-index' %></li>
+            <li><%= link_to 'Register a user', new_admin_user_path, id: 'add-user' %></li>
+          <% end %>
 
-  <%= link_to t('tasks.index.new'),
-              new_task_path,
-              id: "new-task" %>
-</nav>
+          <li><%= link_to 'Log out', session_path, method: :delete, id: 'sign-out' %></li>
+        <% else %>
+          <li><%= link_to 'Register for an account', new_user_path, id: 'sign-up' %></li>
+          <li><%= link_to 'Login', new_session_path, id: 'sign-in' %></li>
+        <% end %>
+      </ul>
+    </nav>
 
-<% if notice %>
-  <p class="notice"><%= notice %></p>
-<% end %>
+    <% flash.each do |key, message| %>
+      <p><%= message %></p>
+    <% end %>
 
-<% if alert %>
-  <p class="alert"><%= alert %></p>
-<% end %>
-
-<%= yield %>
-
-</body>
+    <%= yield %>
+  </body>
 </html>

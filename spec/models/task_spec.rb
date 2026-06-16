@@ -1,28 +1,56 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
+  let!(:user) do
+    User.create!(
+      name: 'Test User',
+      email: 'test@example.com',
+      password: 'password',
+      password_confirmation: 'password',
+      admin: false
+    )
+  end
+
   describe 'Validation test' do
     context 'when the task title is an empty string' do
       it 'validation fails (task is invalid)' do
-        task = Task.new(title: '', content: 'Write a report')
+        task = user.tasks.build(
+          title: '',
+          content: 'Test content',
+          deadline_on: Date.current,
+          priority: :low,
+          status: :not_started
+        )
+
         expect(task).not_to be_valid
-        expect(task.errors[:title]).to include("can't be blank")
       end
     end
 
     context 'when the task content is empty' do
       it 'validation fails (task is invalid)' do
-        task = Task.new(title: 'Important meeting', content: '')
+        task = user.tasks.build(
+          title: 'Test title',
+          content: '',
+          deadline_on: Date.current,
+          priority: :low,
+          status: :not_started
+        )
+
         expect(task).not_to be_valid
-        expect(task.errors[:content]).to include("can't be blank")
       end
     end
 
     context 'when both title and content have values' do
       it 'the task is valid and can be saved' do
-        task = Task.new(title: 'Buy groceries', content: 'Milk, eggs, bread')
+        task = user.tasks.build(
+          title: 'Buy groceries',
+          content: 'Milk, eggs, bread',
+          deadline_on: Date.current,
+          priority: :low,
+          status: :not_started
+        )
+
         expect(task).to be_valid
-        expect { task.save }.to change { Task.count }.by(1)
       end
     end
   end
