@@ -1,5 +1,5 @@
-Task.destroy_all
-User.destroy_all
+Task.delete_all
+User.delete_all
 
 general_user = User.create!(
   name: 'general_user',
