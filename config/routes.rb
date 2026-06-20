@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   # - edit_task   GET    /tasks/:id/edit(.:format) tasks#edit
   # - (plus POST /tasks, PATCH/PUT /tasks/:id, DELETE /tasks/:id)
   resources :tasks
+  resources :labels
 end

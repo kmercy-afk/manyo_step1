@@ -11,21 +11,71 @@
   <% end %>
 
   <div>
-    <%= f.label :title %>
+    <%= f.label :title, "Title" %><br>
     <%= f.text_field :title %>
   </div>
 
+  <br>
+
   <div>
-    <%= f.label :content %>
+    <%= f.label :content, "Content" %><br>
     <%= f.text_area :content %>
   </div>
 
+  <br>
+
+  <div>
+    <%= f.label :deadline_on, "Expiration Date" %><br>
+    <%= f.date_field :deadline_on %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :priority, "Priority" %><br>
+    <%= f.select :priority,
+                 [["Low", 0],
+                  ["Middle", 1],
+                  ["High", 2]],
+                 include_blank: true %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :status, "Status" %><br>
+    <%= f.select :status,
+                 [["Not yet started", 0],
+                  ["In progress", 1],
+                  ["Completed", 2]],
+                 include_blank: true %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :label_ids, "Label" %><br>
+
+    <% Label.all.each do |label| %>
+      <%= f.check_box :label_ids,
+                      { multiple: true, include_hidden: false },
+                      label.id %>
+      <%= label.name %>
+    <% end %>
+  </div>
+
+  <br>
+
   <div>
     <% if @task.persisted? %>
-      <%= f.submit t('tasks.edit.submit'), id: "update-task" %>
+      <%= f.submit "Register", id: "update-task" %>
     <% else %>
-      <%= f.submit t('tasks.new.submit'), id: "create-task" %>
+      <%= f.submit "Register", id: "create-task" %>
     <% end %>
   </div>
 
 <% end %>
+
+<br>
+
+<%= link_to "Back", tasks_path %>

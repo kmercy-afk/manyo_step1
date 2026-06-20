@@ -1,0 +1,16 @@
+<% if label.errors.any? %>
+  <div class="alert alert-danger">
+    <% label.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_with(model: label, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <%= form.submit button_text, class: "btn btn-primary" %>
+<% end %>

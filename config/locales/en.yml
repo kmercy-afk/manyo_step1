@@ -1,13 +1,13 @@
 en:
   global:
     navigation:
-      tasks: "Tasks"
-      new_task: "New Task"
+      tasks: "Task List"
+      new_task: "Register a task"
 
   tasks:
     index:
       title: "Task List"
-      new: "New Task"
+      new: "Register a task"
       show: "Show"
       edit: "Edit"
       destroy: "Delete"
@@ -18,6 +18,7 @@ en:
 
     new:
       title: "New Task"
+      submit: "Register"
 
     edit:
       title: "Edit Task"
@@ -29,6 +30,18 @@ en:
     destroy: "Task was successfully deleted."
 
   activerecord:
+    models:
+      task: "Task"
+
+    attributes:
+      task:
+        title: "Title"
+        content: "Content"
+        created_at: "Creation Date"
+        deadline_on: "Expiration Date"
+        priority: "Priority"
+        status: "Status"
+
     errors:
       models:
         task:
