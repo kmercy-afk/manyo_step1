@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: %i[new create]
   before_action :logout_required, only: %i[new create]
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :correct_user, only: %i[show edit update]
+
+  def index
+    @users = User.all.order(created_at: :desc)
+  end
 
   def new
     @user = User.new
@@ -25,11 +29,15 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user),
-                  notice: 'Your account has been updated'
+      redirect_to user_path(@user), notice: 'Your account has been updated'
     else
       render :edit
     end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to users_path, notice: 'User was successfully deleted'
   end
 
   private
@@ -41,8 +49,7 @@ class UsersController < ApplicationController
   def correct_user
     return if current_user == @user
 
-    redirect_to tasks_path,
-                alert: 'You do not have permission to access'
+    redirect_to tasks_path, alert: 'You do not have permission to access'
   end
 
   def user_params
