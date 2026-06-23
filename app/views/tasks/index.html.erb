@@ -18,7 +18,7 @@
     <div class="form-group col-md-5">
       <%= label_tag :label_id, "Labels" %>
       <%= select_tag :label_id,
-            options_from_collection_for_select(Label.all, :id, :name, params[:label_id]),
+            options_from_collection_for_select(current_user.labels, :id, :name, params[:label_id]),
             include_blank: true,
             class: "form-control" %>
     </div>

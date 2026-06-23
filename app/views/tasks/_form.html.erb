@@ -56,7 +56,7 @@
   <div>
     <%= f.label :label_ids, "Label" %><br>
 
-    <% Label.all.each do |label| %>
+    <% current_user.labels.each do |label| %>
       <%= f.check_box :label_ids,
                       { multiple: true, include_hidden: false },
                       label.id %>
