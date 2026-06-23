@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe 'Label management function', type: :system do
+  before do
+    @user = User.create!(
+      name: 'Test User',
+      email: 'test@example.com',
+      password: 'password',
+      password_confirmation: 'password'
+    )
+
+    login_as(@user)
+  end
+
   describe 'Registration function' do
     context 'When a label is registered' do
       it 'Registered labels are displayed.' do
@@ -16,7 +27,7 @@ RSpec.describe 'Label management function', type: :system do
   describe 'List display function' do
     context 'When transitioning to the list screen' do
       it 'A list of registered labels is displayed.' do
-        Label.create!(name: 'Study')
+        Label.create!(name: 'Study', user: @user)
 
         visit labels_path
 

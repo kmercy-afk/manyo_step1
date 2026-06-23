@@ -1,0 +1,15 @@
+<h1>Account Details Page</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email address:</strong>
+  <%= @user.email %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user), id: 'edit-user' %>
+|
+<%= link_to 'Back', tasks_path, id: 'back' %>

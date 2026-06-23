@@ -1,10 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
+  before do
+    @user = User.create!(
+      name: 'Test User',
+      email: 'test@example.com',
+      password: 'password',
+      password_confirmation: 'password'
+    )
+
+    login_as(@user)
+  end
+
   describe 'List Display Function' do
     it 'displays tasks in descending order of creation' do
-      Task.create!(title: 'Old Task', content: 'Old Content')
-      Task.create!(title: 'New Task', content: 'New Content')
+      Task.create!(title: 'Old Task', content: 'Old Content', user: @user)
+      Task.create!(title: 'New Task', content: 'New Content', user: @user)
 
       visit tasks_path
 
@@ -13,7 +24,7 @@ RSpec.describe 'Tasks', type: :system do
 
     it 'shows pagination' do
       11.times do |i|
-        Task.create!(title: "Task #{i}", content: "Content #{i}")
+        Task.create!(title: "Task #{i}", content: "Content #{i}", user: @user)
       end
 
       visit tasks_path
@@ -25,11 +36,11 @@ RSpec.describe 'Tasks', type: :system do
   describe 'Search function' do
     context 'When searching by label' do
       it 'All tasks with that label are displayed.' do
-        label1 = Label.create!(name: 'Work')
-        label2 = Label.create!(name: 'Study')
+        label1 = Label.create!(name: 'Work', user: @user)
+        label2 = Label.create!(name: 'Study', user: @user)
 
-        task1 = Task.create!(title: 'Task A', content: 'Content A')
-        task2 = Task.create!(title: 'Task B', content: 'Content B')
+        task1 = Task.create!(title: 'Task A', content: 'Content A', user: @user)
+        task2 = Task.create!(title: 'Task B', content: 'Content B', user: @user)
 
         task1.labels << label1
         task2.labels << label2
