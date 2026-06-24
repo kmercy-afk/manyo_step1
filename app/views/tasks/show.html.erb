@@ -4,8 +4,8 @@
 <p>Content: <%= @task.content %></p>
 <p>Creation Date: <%= @task.created_at.strftime("%Y/%m/%d %H:%M") %></p>
 <p>Expiration Date: <%= @task.deadline_on %></p>
-<p>Priority: <%= @task.priority %></p>
-<p>Status: <%= @task.status %></p>
+<p>Priority: <%= ["Low", "Middle", "High"][@task.priority.to_i] %></p>
+<p>Status: <%= ["Not yet started", "In progress", "Completed"][@task.status.to_i] %></p>
 
 <p>
   Label:

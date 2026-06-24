@@ -2,15 +2,15 @@ class LabelsController < ApplicationController
   before_action :set_label, only: %i[edit update destroy]
 
   def index
-    @labels = Label.includes(:tasks)
+    @labels = current_user.labels.includes(:tasks)
   end
 
   def new
-    @label = Label.new
+    @label = current_user.labels.build
   end
 
   def create
-    @label = Label.new(label_params)
+    @label = current_user.labels.build(label_params)
 
     if @label.save
       redirect_to labels_path, notice: "I have registered a label"
@@ -19,8 +19,7 @@ class LabelsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @label.update(label_params)
@@ -38,7 +37,7 @@ class LabelsController < ApplicationController
   private
 
   def set_label
-    @label = Label.find(params[:id])
+    @label = current_user.labels.find(params[:id])
   end
 
   def label_params
